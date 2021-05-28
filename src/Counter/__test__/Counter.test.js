@@ -1,5 +1,5 @@
 import Counter from '../Counter';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 test('ヘッダーは正しいテキストでレンダリングされます', () => {
@@ -35,4 +35,9 @@ test('-ボタンとしてレンダリングされます', () => {
   const subtractBtn = getByTestId('subtract-btn');
 
   expect(subtractBtn.textContent).toBe('-');
+});
+
+test('入力の値を変更する-', () => {
+  const { getByTestId } = render(<Counter />);
+  const input = getByTestId('input');
 });
