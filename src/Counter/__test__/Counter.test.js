@@ -92,3 +92,55 @@ test('入力値を変更してから追加ボタンをクリックすると正�
 
   expect(counterEl.textContent).toBe('5');
 });
+
+test('入力値を変更してから追加ボタンをクリックすると正しく動作します', () => {
+  const { getByTestId } = render(<Counter />);
+  const subtractBtnEl = getByTestId('subtract-btn');
+  const counterEl = getByTestId('counter');
+  const inputEl = getByTestId('input');
+
+  fireEvent.change(inputEl, {
+    target: {
+      value: '5',
+    },
+  });
+
+  fireEvent.click(subtractBtnEl);
+
+  expect(counterEl.textContent).toBe('-5');
+});
+
+test('加算してから減算すると、正しいカウンター番号が得られます', () => {
+  const { getByTestId } = render(<Counter />);
+  const subtractBtnEl = getByTestId('subtract-btn');
+  const addBtnEl = getByTestId('add-btn');
+  const counterEl = getByTestId('counter');
+  const inputEl = getByTestId('input');
+
+  fireEvent.change(inputEl, {
+    target: {
+      value: '10',
+    },
+  });
+
+  fireEvent.click(addBtnEl);
+  fireEvent.click(addBtnEl);
+  fireEvent.click(addBtnEl);
+  fireEvent.click(addBtnEl);
+  fireEvent.click(subtractBtnEl);
+  fireEvent.click(subtractBtnEl);
+
+  expect(counterEl.textContent).toBe('20');
+
+  fireEvent.change(inputEl, {
+    target: {
+      value: '5',
+    },
+  });
+
+  fireEvent.click(addBtnEl);
+  fireEvent.click(subtractBtnEl);
+  fireEvent.click(subtractBtnEl);
+
+  expect(counterEl.textContent).toBe('15');
+});
