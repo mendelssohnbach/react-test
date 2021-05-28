@@ -22,3 +22,17 @@ test('入力は1の初期値です', () => {
 
   expect(inputEl.value).toBe('1');
 });
+
+test('add button renders with +', () => {
+  const { getByTestId } = render(<Counter />);
+  const addBtn = getByTestId('add-btn');
+
+  expect(addBtn.textContent).toBe('+');
+});
+
+test('add button renders with -', () => {
+  const { getByTestId } = render(<Counter />);
+  const subtractBtn = getByTestId('subtract-btn');
+
+  expect(subtractBtn.textContent).toBe('-');
+});
