@@ -51,3 +51,27 @@ test('入力の値を変更する-', () => {
 
   expect(inputEl.value).toBe('5');
 });
+
+test('+をクリックすると、カウンターに 1 が加算されます', () => {
+  const { getByTestId } = render(<Counter />);
+  const addBtnEl = getByTestId('add-btn');
+  const counterEl = getByTestId('counter');
+
+  expect(counterEl.textContent).toBe('0');
+
+  fireEvent.click(addBtnEl);
+
+  expect(counterEl.textContent).toBe('1');
+});
+
+test('-をクリックすると、カウンターから 1 が減算されます', () => {
+  const { getByTestId } = render(<Counter />);
+  const subtractBtnEl = getByTestId('subtract-btn');
+  const counterEl = getByTestId('counter');
+
+  expect(counterEl.textContent).toBe('0');
+
+  fireEvent.click(subtractBtnEl);
+
+  expect(counterEl.textContent).toBe('-1');
+});
