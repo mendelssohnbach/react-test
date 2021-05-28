@@ -39,5 +39,15 @@ test('-ボタンとしてレンダリングされます', () => {
 
 test('入力の値を変更する-', () => {
   const { getByTestId } = render(<Counter />);
-  const input = getByTestId('input');
+  const inputEl = getByTestId('input');
+
+  expect(inputEl.value).toBe('1');
+
+  fireEvent.change(inputEl, {
+    target: {
+      value: '5',
+    },
+  });
+
+  expect(inputEl.value).toBe('5');
 });
