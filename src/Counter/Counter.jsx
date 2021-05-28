@@ -25,7 +25,7 @@ function Counter() {
         data-testid="input"
         value={inputCValue}
         className="text-center"
-        onChange={(e) => setInputCValue(e.target.value)}
+        onChange={(e) => setInputCValue(parseInt(e.target.value))}
       />
       <button data-testid="add-btn" onClick={addToCounter}>
         +

@@ -75,3 +75,20 @@ test('-をクリックすると、カウンターから 1 が減算されます'
 
   expect(counterEl.textContent).toBe('-1');
 });
+
+test('入力値を変更してから追加ボタンをクリックすると正しく動作します', () => {
+  const { getByTestId } = render(<Counter />);
+  const addBtnEl = getByTestId('add-btn');
+  const counterEl = getByTestId('counter');
+  const inputEl = getByTestId('input');
+
+  fireEvent.change(inputEl, {
+    target: {
+      value: '5',
+    },
+  });
+
+  fireEvent.click(addBtnEl);
+
+  expect(counterEl.textContent).toBe('5');
+});
