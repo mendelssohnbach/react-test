@@ -8,3 +8,10 @@ test('ヘッダーは正しいテキストでレンダリングされます', ()
 
   expect(headerEl.textContent).toBe('My Counter');
 });
+
+test('カウンターは最初はテキスト 0 で始まります', () => {
+  const { getByTestId } = render(<Counter />);
+  const counterEl = getByTestId('counter');
+
+  expect(counterEl.textContent).toBe('0');
+});
