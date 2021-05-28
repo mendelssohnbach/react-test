@@ -15,3 +15,10 @@ test('カウンターは最初はテキスト 0 で始まります', () => {
 
   expect(counterEl.textContent).toBe('0');
 });
+
+test('入力は1の初期値です', () => {
+  const { getByTestId } = render(<Counter />);
+  const inputEl = getByTestId('input');
+
+  expect(inputEl.value).toBe('1');
+});
