@@ -1,6 +1,7 @@
 import Counter from '../Counter';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { getTTFB } from 'web-vitals';
 
 test('ヘッダーは正しいテキストでレンダリングされます', () => {
   const { getByTestId } = render(<Counter />);
@@ -143,4 +144,44 @@ test('加算してから減算すると、正しいカウンター番号が得�
   fireEvent.click(subtractBtnEl);
 
   expect(counterEl.textContent).toBe('15');
+});
+
+test('カウンターには正しいclassNameが含まれています', () => {
+  const { getByTestId } = render(<Counter />);
+  const counterEl = getByTestId('counter');
+  const inputEl = getByTestId('input');
+  const subtractBtnEl = getByTestId('subtract-btn');
+  const addBtnEl = getByTestId('add-btn');
+
+  expect(counterEl.className).toBe('');
+
+  fireEvent.change(inputEl, {
+    target: {
+      value: '50',
+    },
+  });
+
+  fireEvent.click(addBtnEl);
+
+  expect(counterEl.className).toBe('');
+
+  fireEvent.click(addBtnEl);
+
+  expect(counterEl.className).toBe('green');
+
+  fireEvent.click(addBtnEl);
+
+  expect(counterEl.className).toBe('green');
+
+  fireEvent.click(subtractBtnEl);
+  fireEvent.click(subtractBtnEl);
+
+  expect(counterEl.className).toBe('');
+
+  fireEvent.click(subtractBtnEl);
+  fireEvent.click(subtractBtnEl);
+  fireEvent.click(subtractBtnEl);
+  fireEvent.click(subtractBtnEl);
+
+  expect(counterEl.className).toBe('red');
 });
